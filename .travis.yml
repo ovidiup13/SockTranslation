@@ -15,6 +15,7 @@ android:
     - extra-android-m2repository
 script:
   - chmod +x ./gradlew
+  - ./gradlew build connectedCheck
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
