@@ -11,7 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements TranslateAudioFragment.OnFragmentInteractionListener, ControlAudioFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements
+        TranslateAudioFragment.OnFragmentInteractionListener,
+        ControlAudioFragment.OnFragmentInteractionListener,
+        LanguageControlFragment.OnFragmentInteractionListener {
 
     private static final String TAG = "MainActivity";
 

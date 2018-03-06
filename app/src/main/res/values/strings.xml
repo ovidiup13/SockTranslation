@@ -10,7 +10,8 @@
     <string name="menu_contact">Contact</string>
     <string name="menu_about">About</string>
 
-    <!-- Fragment stuff -->
+    <!-- Audio fragment stuff -->
     <string name="translate_audio_title">Welcome to Sock translation!</string>
     <string name="control_audio_title">Here is my control audio fragment.</string>
+    <string name="control_language_audio">I am a control for audio language.</string>
 </resources>
