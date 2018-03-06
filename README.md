@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ovidiup13/SockTranslation.svg?branch=master)](https://travis-ci.org/ovidiup13/SockTranslation)
+
 # SockTranslation
 
 Our super awesome Android translation app.
