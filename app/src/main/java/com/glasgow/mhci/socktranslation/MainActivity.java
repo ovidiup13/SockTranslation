@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements TranslateAudio.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements TranslateAudioFragment.OnFragmentInteractionListener, ControlAudioFragment.OnFragmentInteractionListener {
 
     private static final String TAG = "MainActivity";
 
@@ -31,28 +31,32 @@ public class MainActivity extends AppCompatActivity implements TranslateAudio.On
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
+        TranslateAudioFragment fragment = new TranslateAudioFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        Log.v(TAG, "Set up initial fragment");
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener((menuItem) -> {
-            // set item as selected to persist highlight
-            menuItem.setChecked(true);
-            // close drawer when item is tapped
-            mDrawerLayout.closeDrawers();
+                    // set item as selected to persist highlight
+                    menuItem.setChecked(true);
+                    // close drawer when item is tapped
+                    mDrawerLayout.closeDrawers();
 
-            Log.v(TAG, "Menu item selected " + R.string.menu_audio);
+                    Log.v(TAG, "Menu item selected " + R.string.menu_audio);
 
-            // Add code here to update the UI based on the item selected
-            // For example, swap UI fragments here
-            switchFragments(menuItem);
+                    // Add code here to update the UI based on the item selected
+                    // For example, swap UI fragments here
+                    switchFragments(menuItem);
 
-            return true;
-        }
-    );
-}
+                    return true;
+                }
+        );
+    }
 
     private void switchFragments(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_audio: {
-                TranslateAudio fragment = new TranslateAudio();
+                TranslateAudioFragment fragment = new TranslateAudioFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
                 Log.v(TAG, "Replace fragment with Translate Audio");
                 break;
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements TranslateAudio.On
                 break;
             }
             default: {
-                TranslateAudio fragment = new TranslateAudio();
+                TranslateAudioFragment fragment = new TranslateAudioFragment();
                 getSupportFragmentManager().beginTransaction().add(R.id.content_frame, fragment).commit();
                 Log.v(TAG, "Default switch, use fragment Translate Audio");
             }

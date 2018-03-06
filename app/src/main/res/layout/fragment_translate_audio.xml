@@ -2,16 +2,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.glasgow.mhci.socktranslation.TranslateAudio">
+    tools:context="com.glasgow.mhci.socktranslation.TranslateAudioFragment">
 
-    <TextView
-        android:id="@+id/text_translated_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lineSpacingExtra="8sp"
-        android:text="@string/hello_blank_fragment"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:textSize="25sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/audio_language_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/text_translated_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="8sp"
+            android:text="@string/translate_audio_title"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="25sp" />
+
+        <FrameLayout
+            android:id="@+id/audio_control_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </FrameLayout>

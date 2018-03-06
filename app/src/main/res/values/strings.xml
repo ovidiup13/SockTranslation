@@ -12,4 +12,5 @@
 
     <!-- Fragment stuff -->
     <string name="translate_audio_title">Welcome to Sock translation!</string>
+    <string name="control_audio_title">Here is my control audio fragment.</string>
 </resources>
