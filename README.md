@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/ovidiup13/SockTranslation.svg?branch=master)](https://travis-ci.org/ovidiup13/SockTranslation)
 
+<p align="center">
+  <img src="https://i.pinimg.com/236x/09/17/d3/0917d36b0a85231adb8a66a88ff73c8d--sock-crafts-fun-crafts.jpg">
+</p>
+
 # SockTranslation
 
 Our super awesome Android translation app.
