@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements TranslateAudio.On
                 Log.v(TAG, "Replace fragment with Translate Audio");
                 break;
             }
-            case R.id.nav_camera: {
+            case R.id.nav_video: {
                 Log.v(TAG, "Replace fragment with Translate Camera");
                 break;
             }
