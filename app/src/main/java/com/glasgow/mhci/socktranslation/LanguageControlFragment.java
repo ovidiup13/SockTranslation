@@ -3,10 +3,13 @@ package com.glasgow.mhci.socktranslation;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 /**
@@ -26,6 +29,13 @@ public class LanguageControlFragment extends Fragment {
 //    // TODO: Rename and change types of parameters
 //    private String mParam1;
 //    private String mParam2;
+
+    ArrayAdapter<CharSequence> fromAdapter;
+    ArrayAdapter<CharSequence> toAdapter;
+
+    Spinner fromSpinner;
+    Spinner toSpinner;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -54,10 +64,6 @@ public class LanguageControlFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override
@@ -65,6 +71,24 @@ public class LanguageControlFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_language_control, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        fromSpinner = getView().findViewById(R.id.from_spinner);
+        toSpinner = getView().findViewById(R.id.to_spinner);
+
+        // initialise spinners with resource data
+        fromAdapter = ArrayAdapter.createFromResource(getContext(), R.array.language_choices, android.R.layout.simple_spinner_dropdown_item);
+        fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fromSpinner.setAdapter(fromAdapter);
+
+        toAdapter = ArrayAdapter.createFromResource(getContext(), R.array.language_choices, android.R.layout.simple_spinner_dropdown_item);
+        toAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        toSpinner.setAdapter(toAdapter);
+
+        super.onViewCreated(view, savedInstanceState);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -79,6 +103,7 @@ public class LanguageControlFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

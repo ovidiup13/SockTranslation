@@ -14,4 +14,21 @@
     <string name="translate_audio_title">Welcome to Sock translation!</string>
     <string name="control_audio_title">Here is my control audio fragment.</string>
     <string name="control_language_audio">I am a control for audio language.</string>
+
+    <!-- Language Control stuff -->
+    <string name="switch_content_description">Switch languages</string>
+
+    <!-- Language choices -->
+    <string-array name="language_choices">
+        <item>Auto-detect</item>
+        <item>English</item>
+        <item>Spanish</item>
+        <item>German</item>
+        <item>Arabic</item>
+        <item>French</item>
+        <item>Chinese</item>
+        <item>Portuguese</item>
+        <!--TODO: add more languages-->
+    </string-array>
+
 </resources>
