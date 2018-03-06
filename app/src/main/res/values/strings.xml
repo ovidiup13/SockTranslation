@@ -11,5 +11,5 @@
     <string name="menu_about">About</string>
 
     <!-- Fragment stuff -->
-    <string name="hello_blank_fragment">Welcome to Sock translation!</string>
+    <string name="translate_audio_title">Welcome to Sock translation!</string>
 </resources>
