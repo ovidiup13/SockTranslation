@@ -68,7 +68,7 @@ public class ControlAudioFragment extends Fragment implements View.OnClickListen
     }
 
     public void onClick(View view) {
-        Log.v(TAG, "OnClick toggle" + recording);
+        Log.v(TAG, "OnClick toggle " + recording);
 
         // if recording == false, start the service
         // else cancel
@@ -76,14 +76,14 @@ public class ControlAudioFragment extends Fragment implements View.OnClickListen
 
         FloatingActionButton button = (FloatingActionButton) view;
 
+        // change recording flag
+        this.recording = !recording;
+
         if(recording){
             button.setImageResource(R.drawable.ic_stop_white);
         } else {
             button.setImageResource(R.drawable.ic_mic_white);
         }
-
-        // finally change recording value
-        this.recording = !recording;
     }
 
     /**
