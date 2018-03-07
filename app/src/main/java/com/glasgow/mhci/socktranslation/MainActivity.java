@@ -11,6 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.glasgow.mhci.socktranslation.audio.ControlAudioFragment;
+import com.glasgow.mhci.socktranslation.audio.LanguageControlFragment;
+import com.glasgow.mhci.socktranslation.audio.TranslateAudioFragment;
+
 public class MainActivity extends AppCompatActivity implements
         TranslateAudioFragment.OnFragmentInteractionListener,
         ControlAudioFragment.OnFragmentInteractionListener,

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.glasgow.mhci.socktranslation.TranslateAudioFragment">
+    tools:context="com.glasgow.mhci.socktranslation.audio.TranslateAudioFragment">
 
     <FrameLayout
         android:id="@+id/audio_language_frame"

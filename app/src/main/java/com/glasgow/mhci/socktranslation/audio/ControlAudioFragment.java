@@ -1,4 +1,4 @@
-package com.glasgow.mhci.socktranslation;
+package com.glasgow.mhci.socktranslation.audio;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import com.glasgow.mhci.socktranslation.R;
 
 
 /**

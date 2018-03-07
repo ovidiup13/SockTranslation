@@ -1,40 +1,47 @@
-package com.glasgow.mhci.socktranslation;
+package com.glasgow.mhci.socktranslation.audio;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import com.glasgow.mhci.socktranslation.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TranslateAudioFragment.OnFragmentInteractionListener} interface
+ * {@link LanguageControlFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TranslateAudioFragment#newInstance} factory method to
+ * Use the {@link LanguageControlFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TranslateAudioFragment extends Fragment implements ControlAudioFragment.OnFragmentInteractionListener,
-        LanguageControlFragment.OnFragmentInteractionListener {
-
-    private static final String TAG = "TranslateAudioFragment";
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class LanguageControlFragment extends Fragment {
+//    // TODO: Rename parameter arguments, choose names that match
+//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
 //    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
+//
+//    // TODO: Rename and change types of parameters
 //    private String mParam1;
 //    private String mParam2;
 
+    ArrayAdapter<CharSequence> fromAdapter;
+    ArrayAdapter<CharSequence> toAdapter;
+
+    Spinner fromSpinner;
+    Spinner toSpinner;
+
+
     private OnFragmentInteractionListener mListener;
 
-    public TranslateAudioFragment() {
+    public LanguageControlFragment() {
         // Required empty public constructor
     }
 
@@ -44,11 +51,11 @@ public class TranslateAudioFragment extends Fragment implements ControlAudioFrag
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TranslateAudioFragment.
+     * @return A new instance of fragment LanguageControlFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TranslateAudioFragment newInstance(String param1, String param2) {
-        TranslateAudioFragment fragment = new TranslateAudioFragment();
+    public static LanguageControlFragment newInstance(String param1, String param2) {
+        LanguageControlFragment fragment = new LanguageControlFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -59,23 +66,31 @@ public class TranslateAudioFragment extends Fragment implements ControlAudioFrag
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // add language fragment
-        Log.v(TAG, "Create language selection fragment");
-        LanguageControlFragment languageControlFragment = new LanguageControlFragment();
-        getChildFragmentManager().beginTransaction().add(R.id.audio_language_frame, languageControlFragment).commit();
-
-        // add control fragment
-        Log.v(TAG, "Create control fragment");
-        ControlAudioFragment controlAudioFragment = new ControlAudioFragment();
-        getChildFragmentManager().beginTransaction().add(R.id.audio_control_frame, controlAudioFragment).commit();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_translate_audio, container, false);
+        return inflater.inflate(R.layout.fragment_language_control, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        fromSpinner = getView().findViewById(R.id.from_spinner);
+        toSpinner = getView().findViewById(R.id.to_spinner);
+
+        // initialise spinners with resource data
+        fromAdapter = ArrayAdapter.createFromResource(getContext(), R.array.language_choices, android.R.layout.simple_spinner_dropdown_item);
+        fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fromSpinner.setAdapter(fromAdapter);
+
+        toAdapter = ArrayAdapter.createFromResource(getContext(), R.array.language_choices, android.R.layout.simple_spinner_dropdown_item);
+        toAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        toSpinner.setAdapter(toAdapter);
+
+        super.onViewCreated(view, savedInstanceState);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +105,7 @@ public class TranslateAudioFragment extends Fragment implements ControlAudioFrag
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -100,16 +116,6 @@ public class TranslateAudioFragment extends Fragment implements ControlAudioFrag
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    /**
-     * Handle interaction with child fragments.
-     *
-     * @param uri
-     */
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     /**
