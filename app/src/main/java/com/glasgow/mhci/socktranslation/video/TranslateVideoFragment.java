@@ -1,10 +1,13 @@
 package com.glasgow.mhci.socktranslation.video;
 
+import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Camera;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,7 +20,9 @@ import com.glasgow.mhci.socktranslation.R;
  * {@link TranslateVideoFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class TranslateVideoFragment extends Fragment {
+public class TranslateVideoFragment extends Fragment implements CameraPreviewFragment.OnFragmentInteractionListener {
+
+    private static final String TAG = "TranslateVideoFragment";
 
     private OnFragmentInteractionListener mListener;
 
@@ -28,6 +33,10 @@ public class TranslateVideoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.v(TAG, "Attaching camera fragment");
+        CameraPreviewFragment fragment = new CameraPreviewFragment();
+        getChildFragmentManager().beginTransaction().replace(R.id.camera_preview, fragment).commit();
     }
 
     @Override
@@ -59,6 +68,11 @@ public class TranslateVideoFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     /**

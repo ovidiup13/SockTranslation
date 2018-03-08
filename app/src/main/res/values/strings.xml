@@ -31,7 +31,8 @@
         <!--TODO: add more languages-->
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Video fragment stuff -->
+    <string name="camera_error">Camera error</string>
+    <string name="request_permission">Sock Translation would like to access the camera.</string>
 
 </resources>
