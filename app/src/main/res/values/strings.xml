@@ -28,7 +28,11 @@
         <item>French</item>
         <item>Chinese</item>
         <item>Portuguese</item>
-        <!--TODO: add more languages-->
     </string-array>
+
+    <!-- Video fragment stuff -->
+    <string name="camera_error">Camera error</string>
+    <string name="request_permission">Sock Translation would like to access the camera.</string>
+    <string name="subtitle_text">"Hello darkness my old friend, I've come to speak with you again."</string>
 
 </resources>

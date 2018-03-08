@@ -11,10 +11,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.glasgow.mhci.socktranslation.audio.ControlFragment;
+import com.glasgow.mhci.socktranslation.audio.LanguageControlFragment;
+import com.glasgow.mhci.socktranslation.audio.TranslateAudioFragment;
+import com.glasgow.mhci.socktranslation.video.CameraPreviewFragment;
+import com.glasgow.mhci.socktranslation.video.TranslateVideoFragment;
+
 public class MainActivity extends AppCompatActivity implements
         TranslateAudioFragment.OnFragmentInteractionListener,
-        ControlAudioFragment.OnFragmentInteractionListener,
-        LanguageControlFragment.OnFragmentInteractionListener {
+        ControlFragment.OnFragmentInteractionListener,
+        LanguageControlFragment.OnFragmentInteractionListener,
+        TranslateVideoFragment.OnFragmentInteractionListener,
+        CameraPreviewFragment.OnFragmentInteractionListener {
 
     private static final String TAG = "MainActivity";
 
@@ -35,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         TranslateAudioFragment fragment = new TranslateAudioFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
         Log.v(TAG, "Set up initial fragment");
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -59,13 +67,15 @@ public class MainActivity extends AppCompatActivity implements
     private void switchFragments(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_audio: {
-                TranslateAudioFragment fragment = new TranslateAudioFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
                 Log.v(TAG, "Replace fragment with Translate Audio");
+                TranslateAudioFragment fragment = new TranslateAudioFragment();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             }
             case R.id.nav_video: {
                 Log.v(TAG, "Replace fragment with Translate Camera");
+                TranslateVideoFragment fragment = new TranslateVideoFragment();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             }
             case R.id.nav_history: {
@@ -86,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements
             }
             default: {
                 TranslateAudioFragment fragment = new TranslateAudioFragment();
-                getSupportFragmentManager().beginTransaction().add(R.id.content_frame, fragment).commit();
+                getFragmentManager().beginTransaction().add(R.id.content_frame, fragment).commit();
                 Log.v(TAG, "Default switch, use fragment Translate Audio");
             }
         }

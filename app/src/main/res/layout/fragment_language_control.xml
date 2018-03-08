@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:paddingBottom="8dp"
     android:paddingTop="8dp"
-    tools:context="com.glasgow.mhci.socktranslation.LanguageControlFragment">
+    tools:context="com.glasgow.mhci.socktranslation.audio.LanguageControlFragment">
 
     <Spinner
         android:id="@+id/from_spinner"
