@@ -9,6 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +32,9 @@ public class TranslateAudioFragment extends Fragment implements ControlAudioFrag
         LanguageControlFragment.OnFragmentInteractionListener {
 
     private static final String TAG = "TranslateAudioFragment";
+
+    // todo API_KEY should not be stored in plain sight
+    private static final String API_KEY = "AIzaSyDna9GXyTWIEbFLMzT-Hb1xhsaf2S5dcXA";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,6 +82,36 @@ public class TranslateAudioFragment extends Fragment implements ControlAudioFrag
         Log.v(TAG, "Create control fragment");
         ControlAudioFragment controlAudioFragment = new ControlAudioFragment();
         getChildFragmentManager().beginTransaction().add(R.id.audio_control_frame, controlAudioFragment).commit();
+
+
+
+        /*final TextView textView = (TextView) findViewById(R.id.text_view);*/
+        final Handler textViewHandler = new Handler();
+        final TextView textView = (TextView) getActivity().findViewById(R.id.text_view);
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                TranslateOptions options = TranslateOptions.newBuilder()
+                        .setApiKey(API_KEY)
+                        .build();
+                Translate translate = options.getService();
+                final Translation translation =
+                        translate.translate("Hello World, how are we today?",
+                                Translate.TranslateOption.targetLanguage("de"));
+                textViewHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (textView != null) {
+                            textView.setText(translation.getTranslatedText());
+                        }
+                    }
+                });
+                return null;
+            }
+        }.execute();
+
+
     }
 
     @Override

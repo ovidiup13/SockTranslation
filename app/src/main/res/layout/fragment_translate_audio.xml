@@ -21,14 +21,16 @@
         android:scrollbars="vertical">
 
         <TextView
-            android:id="@+id/text_translated_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8sp"
             android:text="@string/translate_audio_title"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:id="@+id/text_view" />
+        <!--android:id="@+id/text_translated_view"-->
+
     </ScrollView>
 
     <FrameLayout
