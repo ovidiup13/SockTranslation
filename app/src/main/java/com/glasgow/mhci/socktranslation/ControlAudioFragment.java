@@ -1,15 +1,22 @@
 package com.glasgow.mhci.socktranslation;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import java.io.IOException;
 
 
 /**
@@ -29,6 +36,46 @@ public class ControlAudioFragment extends Fragment implements View.OnClickListen
     public ControlAudioFragment() {
         // Required empty public constructor
     }
+    private SpeechService mSpeechService;
+
+    private VoiceRecorder mVoiceRecorder;
+    private final VoiceRecorder.Callback mVoiceCallback = new VoiceRecorder.Callback() {
+
+        @Override
+        public void onVoiceStart() throws IOException {
+            if (mSpeechService != null) {
+                mSpeechService.startRecognizing(mVoiceRecorder.getSampleRate());
+            }
+        }
+
+        @Override
+        public void onVoice(byte[] data, int size) {
+            if (mSpeechService != null) {
+                mSpeechService.recognize(data, size);
+            }
+        }
+
+        @Override
+        public void onVoiceEnd() {
+            if (mSpeechService != null) {
+                mSpeechService.finishRecognizing();
+            }
+        }
+
+    };
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder binder) {
+            mSpeechService = SpeechService.from(binder);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mSpeechService = null;
+        }
+
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,19 +118,35 @@ public class ControlAudioFragment extends Fragment implements View.OnClickListen
         // if recording == false, start the service
         // else cancel
         //TODO: add service call here based on recording value
+        Intent intent=new Intent(this.getContext(), SpeechService.class);
 
         FloatingActionButton button = (FloatingActionButton) view;
 
         if(recording){
             button.setImageResource(R.drawable.ic_stop_white);
+            this.getContext().startService(intent);
         } else {
             button.setImageResource(R.drawable.ic_mic_white);
+            this.getContext().stopService(intent);
         }
 
         // finally change recording value
         this.recording = !recording;
     }
 
+    private void startRecorder(){
+        if(mVoiceRecorder != null){
+            mVoiceRecorder.stop();
+        }
+        mVoiceRecorder = new VoiceRecorder(mVoiceCallback);
+        mVoiceRecorder.start();
+    }
+    private void stopVoiceRecorder() {
+        if (mVoiceRecorder != null) {
+            mVoiceRecorder.stop();
+            mVoiceRecorder = null;
+        }
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
