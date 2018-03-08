@@ -20,7 +20,7 @@ import com.glasgow.mhci.socktranslation.R;
  * Use the {@link TranslateAudioFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TranslateAudioFragment extends Fragment implements ControlAudioFragment.OnFragmentInteractionListener,
+public class TranslateAudioFragment extends Fragment implements ControlFragment.OnFragmentInteractionListener,
         LanguageControlFragment.OnFragmentInteractionListener {
 
     private static final String TAG = "TranslateAudioFragment";
@@ -69,8 +69,8 @@ public class TranslateAudioFragment extends Fragment implements ControlAudioFrag
 
         // add control fragment
         Log.v(TAG, "Create control fragment");
-        ControlAudioFragment controlAudioFragment = new ControlAudioFragment();
-        getChildFragmentManager().beginTransaction().add(R.id.audio_control_frame, controlAudioFragment).commit();
+        ControlFragment controlFragment = new ControlFragment();
+        getChildFragmentManager().beginTransaction().add(R.id.audio_control_frame, controlFragment).commit();
     }
 
     @Override

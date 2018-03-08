@@ -17,19 +17,23 @@ import com.glasgow.mhci.socktranslation.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ControlAudioFragment.OnFragmentInteractionListener} interface
+ * {@link ControlFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class ControlAudioFragment extends Fragment implements View.OnClickListener {
+public class ControlFragment extends Fragment implements View.OnClickListener {
 
-    private static final String TAG = "ControlAudioFragment";
+    private static final String TAG = "ControlFragment";
 
     private boolean recording = false;
 
     private OnFragmentInteractionListener mListener;
 
-    public ControlAudioFragment() {
+    public ControlFragment() {
         // Required empty public constructor
+    }
+
+    public static ControlFragment newInstance() {
+        return new ControlFragment();
     }
 
     @Override
