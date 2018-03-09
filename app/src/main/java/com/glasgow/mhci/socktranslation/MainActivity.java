@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import com.glasgow.mhci.socktranslation.audio.ControlFragment;
 import com.glasgow.mhci.socktranslation.audio.LanguageControlFragment;
 import com.glasgow.mhci.socktranslation.audio.TranslateAudioFragment;
+import com.glasgow.mhci.socktranslation.history.HistoryFragment;
+import com.glasgow.mhci.socktranslation.history.RecordingView;
 import com.glasgow.mhci.socktranslation.video.CameraPreviewFragment;
 import com.glasgow.mhci.socktranslation.video.TranslateVideoFragment;
 
@@ -22,7 +24,9 @@ public class MainActivity extends AppCompatActivity implements
         ControlFragment.OnFragmentInteractionListener,
         LanguageControlFragment.OnFragmentInteractionListener,
         TranslateVideoFragment.OnFragmentInteractionListener,
-        CameraPreviewFragment.OnFragmentInteractionListener {
+        CameraPreviewFragment.OnFragmentInteractionListener,
+        HistoryFragment.OnRecordingSelectedListener,
+        RecordingView.OnFragmentInteractionListener {
 
     private static final String TAG = "MainActivity";
 
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements
             }
             case R.id.nav_history: {
                 Log.v(TAG, "Replace fragment with History");
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, HistoryFragment.newInstance()).commit();
                 break;
             }
             case R.id.nav_settings: {
@@ -115,6 +120,11 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onRecordingSelected(int id) {
 
     }
 }

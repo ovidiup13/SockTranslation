@@ -35,4 +35,13 @@
     <string name="request_permission">Sock Translation would like to access the camera.</string>
     <string name="subtitle_text">"Hello darkness my old friend, I've come to speak with you again."</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
 </resources>

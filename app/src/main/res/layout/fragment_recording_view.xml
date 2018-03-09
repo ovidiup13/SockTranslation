@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:background="?attr/selectableItemBackground"
+    android:elevation="6dp"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="10dp"
+    tools:context="com.glasgow.mhci.socktranslation.history.RecordingView">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:cropToPadding="true"
+        android:duplicateParentState="false"
+        android:focusable="true"
+        android:src="@drawable/ic_play_recording"
+        app:backgroundTint="@color/cardview_light_background"
+        app:elevation="9dp" />
+
+    <RelativeLayout
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        android:layout_marginEnd="15dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/recording_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:text="Recording 1" />
+
+            <TextView
+                android:id="@+id/recording_text_partial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                tools:text="Here is a bunch of text ..." />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/from_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="English"
+                android:textSize="12sp" />
+
+            <ImageButton
+                android:id="@+id/arrows"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="15dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/switch_content_description"
+                android:src="@drawable/ic_compare_arrows" />
+
+            <TextView
+                android:id="@+id/to_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Chinese"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
