@@ -1,11 +1,10 @@
-package com.glasgow.mhci.socktranslation.audio;
+package com.glasgow.mhci.socktranslation.history;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,50 +12,43 @@ import android.widget.TextView;
 
 import com.glasgow.mhci.socktranslation.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TranslateAudioFragment.OnFragmentInteractionListener} interface
+ * {@link RecordingView.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TranslateAudioFragment#newInstance} factory method to
+ * Use the {@link RecordingView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TranslateAudioFragment extends Fragment implements ControlFragment.OnFragmentInteractionListener,
-        LanguageControlFragment.OnFragmentInteractionListener {
+public class RecordingView extends Fragment {
 
-    private static final String TAG = "TranslateAudioFragment";
+    private static final String RECORDING_PARAM = "recording";
+    private Recording recording;
 
     private OnFragmentInteractionListener mListener;
-
-    public TranslateAudioFragment() {
-        // Required empty public constructor
-    }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment TranslateAudioFragment.
+     * @param recording Parameter 1.
+     * @return A new instance of fragment RecordingView.
      */
     // TODO: Rename and change types and number of parameters
-    public static TranslateAudioFragment newInstance() {
-        return new TranslateAudioFragment();
+    public static RecordingView newInstance(Recording recording) {
+        RecordingView fragment = new RecordingView();
+        Bundle args = new Bundle();
+        args.putSerializable(RECORDING_PARAM, recording);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // add language fragment
-        Log.v(TAG, "Create language selection fragment");
-        LanguageControlFragment languageControlFragment = new LanguageControlFragment();
-        getChildFragmentManager().beginTransaction().add(R.id.audio_language_frame, languageControlFragment).commit();
-
-        // add control fragment
-        Log.v(TAG, "Create control fragment");
-        ControlFragment controlFragment = new ControlFragment();
-        getChildFragmentManager().beginTransaction().add(R.id.audio_control_frame, controlFragment).commit();
+        if (getArguments() != null) {
+            recording = (Recording) getArguments().getSerializable(RECORDING_PARAM);
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -64,10 +56,22 @@ public class TranslateAudioFragment extends Fragment implements ControlFragment.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_translate_audio, container, false);
+        View v = inflater.inflate(R.layout.fragment_recording_view, container, false);
 
-        TextView textView = v.findViewById(R.id.text_translated_view);
-        textView.setText("Press the play button to start translation!");
+        // name
+        TextView nameView = v.findViewById(R.id.recording_name);
+        nameView.setText(recording.getName());
+
+        // text
+        TextView textView = v.findViewById(R.id.recording_text_partial);
+        textView.setText(recording.getText().substring(0, 15) + "...");
+
+        // languages
+        TextView fromLanguage = v.findViewById(R.id.from_language);
+        fromLanguage.setText(recording.getFromLanguage());
+
+        TextView toLanguage = v.findViewById(R.id.to_language);
+        toLanguage.setText(recording.getToLanguage());
 
         return v;
     }
@@ -87,16 +91,6 @@ public class TranslateAudioFragment extends Fragment implements ControlFragment.
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    /**
-     * Handle interaction with child fragments.
-     *
-     * @param uri
-     */
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     /**
